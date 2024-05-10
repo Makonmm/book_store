@@ -56,6 +56,7 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+<<<<<<< HEAD
 name = "django-rest-framework"
 version = "0.1.0"
 description = "alias."
@@ -69,6 +70,8 @@ files = [
 djangorestframework = "*"
 
 [[package]]
+=======
+>>>>>>> d41ce3ee161b98938fb9405f38f0d527f560c210
 name = "djangorestframework"
 version = "3.15.1"
 description = "Web APIs for Django, made easy."
@@ -225,4 +228,8 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
+<<<<<<< HEAD
 content-hash = "adb3a78b96385d3d84323bb7b41864b9c2d151049391366ec753dad1f7f2bdc1"
+=======
+content-hash = "16f14cb113a5a9dcd71f5cfb4ddc3e47de8818402f4953ba21d691cae377add6"
+>>>>>>> d41ce3ee161b98938fb9405f38f0d527f560c210
