@@ -9,16 +9,14 @@ readme = "README.md"
 python = "^3.12"
 django = "^5.0.6"
 djangorestframework = "^3.15.1"
-<<<<<<< HEAD
 django-rest-framework = "^0.1.0"
-=======
->>>>>>> d41ce3ee161b98938fb9405f38f0d527f560c210
+django-extensions = "^3.2.3"
 
 [tool.poetry.group.dev.dependencies]
-0 = "^0.0.0"
 pytest = "^8.2.0"
 factory-boy = "^3.3.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
