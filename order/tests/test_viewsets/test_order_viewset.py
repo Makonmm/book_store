@@ -3,9 +3,9 @@ import json
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
-
+from rest_framework.authtoken.models import Token
 from order.factories import OrderFactory, UserFactory
-from order.models import Order
+from order.models.order import Order
 from product.factories import CategoryFactory, ProductFactory
 from product.models import Product
 
@@ -15,6 +15,13 @@ class TestOrderViewSet(APITestCase):
     client = APIClient()
 
     def setUp(self):
+        self.user = UserFactory()  # Informando usuário
+        # Criando o token de autenticação
+        token = Token.objects.create(user=self.user)
+        token.save()  # Salvando o token
+        # Definindo as credenciais do cliente"
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+
         self.category = CategoryFactory(title="technology")
         self.product = ProductFactory(
             title="mouse", price=100, category=[self.category]
@@ -28,24 +35,22 @@ class TestOrderViewSet(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         order_data = json.loads(response.content)
-        self.assertIsInstance(order_data, list)  # Verifica se é uma lista
-        # Verifica se a lista não está vazia
-        self.assertTrue(len(order_data) > 0)
-
-        order_info = order_data[0]  # Obtem o primeiro item da lista
-        # Verifica se o item é um dicionário
-        self.assertIsInstance(order_info, dict)
-
-        # Obtém as informações do produto
-        product_info = order_info["product"][0]
-        self.assertEqual(product_info["title"], self.product.title)
-        self.assertEqual(product_info["price"], self.product.price)
-        self.assertEqual(product_info["active"], self.product.active)
-        self.assertEqual(product_info["category"]
-                         [0]["title"], self.category.title)
+        self.assertEqual(
+            order_data["results"][0]["product"][0]["title"], self.product.title
+        )
+        self.assertEqual(
+            order_data["results"][0]["product"][0]["price"], self.product.price
+        )
+        self.assertEqual(
+            order_data["results"][0]["product"][0]["active"], self.product.active
+        )
+        self.assertEqual(
+            order_data["results"][0]["product"][0]["category"][0]["title"],
+            self.category.title,
+        )
 
     def test_create_order(self):
-        user = UserFactory()
+        user = UserFactory()  # Cria um novo usuário
         product = ProductFactory()
         data = json.dumps({"products_id": [product.id], "user": user.id})
 
