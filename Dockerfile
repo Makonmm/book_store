@@ -42,6 +42,7 @@ RUN apt-get update \
 RUN pip install poetry
 
 
+
 # install postgres dependencies inside of Docker
 RUN apt-get update \
     && apt-get -y install libpq-dev gcc \
