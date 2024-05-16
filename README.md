@@ -1,1 +1,1 @@
-# book_store
+# bookstore project
