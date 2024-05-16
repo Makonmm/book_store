@@ -15,8 +15,7 @@ class CategoryViewSetTest(APITestCase):
         self.category = CategoryFactory(title="books")
 
     def test_get_all_category(self):
-        response = self.client.get(
-            reverse("category-list", kwargs={"version": "v1"}))
+        response = self.client.get(reverse("category-list", kwargs={"version": "v1"}))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -33,8 +32,7 @@ class CategoryViewSetTest(APITestCase):
         self.assertTrue(len(category_data["results"]) > 0)
 
         # Verifica se o título da primeira categoria na resposta corresponde ao título da categoria criada no setUp()
-        self.assertEqual(category_data["results"]
-                         [0]["title"], self.category.title)
+        self.assertEqual(category_data["results"][0]["title"], self.category.title)
 
     def test_create_category(self):
         data = {"title": "technology"}
