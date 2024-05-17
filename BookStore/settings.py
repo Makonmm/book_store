@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1",
-                 "bookstore-api-project-ee7d2771b9d8.herokuapp.com"]
+                 "bookstore-api-project-4d9d588ff43e.herokuapp.com"]
 
 
 # Application definition
