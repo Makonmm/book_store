@@ -7,38 +7,38 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
-    POETRY_VERSION=1.8.3 \
-    POETRY_HOME="/opt/poetry" \
-    POETRY_VIRTUALENVS_IN_PROJECT=true \
-    POETRY_NO_INTERACTION=1 \
-    PYSETUP_PATH="/opt/pysetup" \
-    VENV_PATH="/opt/pysetup/.venv" \
-    PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
+    VENV_PATH="/opt/venv" \
+    PATH="$VENV_PATH/bin:$PATH"
 
-# Instala dependências do sistema
+# Instala dependências do sistema, incluindo git e openssh-client
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    curl build-essential libpq-dev gcc \
+    curl build-essential libpq-dev gcc git openssh-client \
     && rm -rf /var/lib/apt/lists/*
 
-# Instala o Poetry
-RUN pip install poetry
+# Verifica a instalação do Git e SSH
+RUN git --version && ssh -V
+
+# Adiciona a chave SSH do GitHub aos known_hosts
+RUN mkdir -p ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+# Cria e ativa um ambiente virtual
+RUN python -m venv $VENV_PATH
+
+# Atualiza o pip e instala dependências
+RUN pip install --upgrade pip
 
 # Define o diretório de trabalho para instalação das dependências Python
-WORKDIR $PYSETUP_PATH
-
-# Copia os arquivos de configuração do Poetry
-COPY poetry.lock pyproject.toml ./
-
-# Instala as dependências Python
-RUN poetry install --no-dev
-
-# Define o diretório de trabalho para a aplicação
 WORKDIR /app
 
-# Copia o código da aplicação para o contêiner
-COPY . .
+# Copia os arquivos de requisitos
+COPY requirements.txt .
 
-# Exponha a porta 8000
+# Instala as dependências do Python
+RUN pip install -r requirements.txt
+
+# Copia o restante do código da aplicação
+COPY . /app/
+
 EXPOSE 8000
 
 # Comando para iniciar o servidor Gunicorn

@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = int(os.environ.get("DEBUG", default=1))
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1",
-                 "bookstore-api-project-13ef8d1daf71.herokuapp.com/"]
+                 "bookstore-api-project-ee7d2771b9d8.herokuapp.com"]
 
 
 # Application definition
@@ -51,7 +51,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -59,6 +58,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "BookStore.urls"
@@ -82,8 +82,6 @@ TEMPLATES = [
 WSGI_APPLICATION = "BookStore.wsgi.application"
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Database
@@ -155,3 +153,5 @@ REST_FRAMEWORK = {
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
