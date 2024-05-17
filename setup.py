@@ -1,0 +1,38 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="bookstore",
+    version="0.1.0",
+    packages=find_packages(),
+    include_package_data=True,
+    install_requires=[
+        "asgiref==3.8.1",
+        "colorama==0.4.6",
+        "Django==5.0.6",
+        "django-debug-toolbar==4.3.0",
+        "django-extensions==3.2.3",
+        "django-gunicorn==0.1.1",
+        "django-rest-framework==0.1.0",
+        "djangorestframework==3.15.1",
+        "factory-boy==3.3.0",
+        "Faker==25.2.0",
+        "flake8==7.0.0",
+        "gunicorn==22.0.0",
+        "iniconfig==2.0.0",
+        "mccabe==0.7.0",
+        "packaging==24.0",
+        "pluggy==1.5.0",
+        "psycopg2-binary==2.9.9",
+        "pycodestyle==2.11.1",
+        "pyflakes==3.2.0",
+        "pytest==8.2.0",
+        "python-dateutil==2.9.0.post0",
+        "six==1.16.0",
+        "sqlparse==0.5.0",
+        "tzdata==2024.1",
+        "whitenoise==6.6.0",
+    ],
+    dependency_links=[
+        "git+https://github.com/Makonmm/book_store.git@dd237057228d37efd194e866ef8c604335cc10a1#egg=bookstore"
+    ]
+)
