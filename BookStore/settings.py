@@ -87,8 +87,16 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DDATABASES = {
+DATABASES = {
     "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "railway",
+        "USER": "postgres",
+        "PASSWORD": "jtbIdEYOBgxhpYtJiHPSYsixkGvPcrXG",
+        "HOST": "roundhouse.proxy.rlwy.net",
+        "PORT": "55371",
+    },
+    "other": {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
         "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
         "USER": os.environ.get("SQL_USER", "user"),
@@ -96,14 +104,6 @@ DDATABASES = {
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
     },
-    "other_database": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "railway",
-        "USER": "postgres",
-        "PASSWORD": "jtbIdEYOBgxhpYtJiHPSYsixkGvPcrXG",
-        "HOST": "roundhouse.proxy.rlwy.net",
-        "PORT": "55371",
-    }
 }
 
 
