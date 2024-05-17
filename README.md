@@ -1,4 +1,4 @@
-# Bookstore
+# Bookstore project
 
 Bookstore  project APP from Backend Python course from EBAC
 
@@ -6,7 +6,6 @@ Bookstore  project APP from Backend Python course from EBAC
 
 ```
 Python 3.5>
-Poetry
 Docker && docker-compose
 
 ```
@@ -23,14 +22,14 @@ Docker && docker-compose
 
    ```shell
    cd bookstore
-   poetry install
+   pip install
    ```
 
 3. Run local dev server:
 
    ```shell
-   poetry run manage.py migrate
-   poetry run python manage.py runserver
+   python manage.py migrate
+   python manage.py runserver
    ```
    
 4. Run docker dev server environment:
